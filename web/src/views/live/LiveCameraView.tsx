@@ -257,7 +257,10 @@ export default function LiveCameraView({
     false,
   );
 
-  const [showStats, setShowStats] = useState(false);
+  const [showStats, setShowStats] = usePersistence<boolean>(
+    `${camera.name}-show-stats`,
+    true,
+  );
 
   const [fullResolution, setFullResolution] = useState<VideoResolutionType>({
     width: 0,
@@ -573,7 +576,7 @@ export default function LiveCameraView({
                 preferredLiveMode={preferredLiveMode}
                 playInBackground={playInBackground ?? false}
                 setPlayInBackground={setPlayInBackground}
-                showStats={showStats}
+                showStats={showStats ?? true}
                 setShowStats={setShowStats}
                 isRestreamed={isRestreamed ?? false}
                 setLowBandwidth={setLowBandwidth}

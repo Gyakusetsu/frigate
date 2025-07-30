@@ -25,7 +25,7 @@ export function PlayerStats({ stats, minimal }: PlayerStatsProps) {
           <span
             className={`text-white ${stats.latency > 2 ? "text-danger" : ""}`}
           >
-            {t("stats.latency.value", { seconds: stats.latency.toFixed(2) })}
+            {t("stats.latency.value", { seconds: stats.latency })}
           </span>
         </p>
       )}

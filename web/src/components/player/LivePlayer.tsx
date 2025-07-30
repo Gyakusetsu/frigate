@@ -235,7 +235,7 @@ export default function LivePlayer({
   let player;
   if (!autoLive || !streamName || !cameraEnabled) {
     player = null;
-  } else if (preferredLiveMode == "webrtc") {
+  } else if (true) { // Always use WebRTC if available
     player = (
       <WebRtcPlayer
         key={"webrtc_" + key}

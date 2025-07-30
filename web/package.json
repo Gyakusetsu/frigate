@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc && vite build --base=/BASE_PATH/",
+    "build": "tsc && vite build",
     "lint": "eslint --ext .jsx,.js,.tsx,.ts --ignore-path .gitignore .",
     "lint:fix": "eslint --ext .jsx,.js,.tsx,.ts --ignore-path .gitignore --fix .",
     "preview": "vite preview",

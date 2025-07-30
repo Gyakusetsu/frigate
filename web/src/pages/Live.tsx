@@ -5,6 +5,7 @@ import {
   usePersistedOverlayState,
   useSearchEffect,
 } from "@/hooks/use-overlay-state";
+import { useMicrophonePermission } from "@/hooks/use-microphone-permission";
 import { FrigateConfig } from "@/types/frigateConfig";
 import LiveBirdseyeView from "@/views/live/LiveBirdseyeView";
 import LiveCameraView from "@/views/live/LiveCameraView";
@@ -18,6 +19,9 @@ function Live() {
   const { t } = useTranslation(["views/live"]);
   const { data: config } = useSWR<FrigateConfig>("config");
 
+  // microphone permission - immediately request on page load
+  const { requestPermission, permissionState, isSupported: isMicSupported } = useMicrophonePermission();
+
   // selection
 
   const [selectedCameraName, setSelectedCameraName] = useHashState();
@@ -25,6 +29,14 @@ function Live() {
     "cameraGroup",
     "default" as string,
   );
+
+  // Request microphone permission immediately when component mounts
+  useEffect(() => {
+    if (isMicSupported && permissionState === "prompt") {
+      console.log("Requesting microphone permission on page load");
+      requestPermission();
+    }
+  }, [isMicSupported, permissionState, requestPermission]);
 
   useSearchEffect("group", (cameraGroup) => {
     if (config && cameraGroup) {
